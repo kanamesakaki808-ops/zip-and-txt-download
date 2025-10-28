@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>複数ファイル自動ダウンロード</title>
+</head>
+<body>
+<script>
+  const files = [
+    { url: "app.zip", name: "suzumdtextapp.zip" },
+    { url: "eamla.txt", name: "example.txt" }
+  ];
+
+  function downloadFile(file) {
+    const a = document.createElement("a");
+    a.href = file.url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // 1秒ごとに順番にダウンロード（ブラウザの衝突防止）
+  files.forEach((file, index) => {
+    setTimeout(() => downloadFile(file), index * 1000);
+  });
+</script>
+
+<p>ZIPとTXTファイルが自動でダウンロードされます。</p>
+</body>
+</html>
